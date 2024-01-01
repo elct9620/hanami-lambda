@@ -37,6 +37,8 @@ module MyApp # Rename to your app name
 end
 ```
 
+> Generator is comming soon.
+
 ## Usage
 
 Use `config/lambda.Hanami::Lambda.call` as the function handler
@@ -51,6 +53,8 @@ Resources:
       Handler: config/lambda.Hanami::Lambda.call
       Runtime: ruby3.2
 ```
+
+> Currently, the only `APIGateWay` event is supported
 
 ## Development
 
