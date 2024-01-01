@@ -26,4 +26,11 @@ RSpec.describe Hanami::Lambda::Rack do
     it { is_expected.to include(body: "Hello from Rack") }
     it { is_expected.to include(headers: {}) }
   end
+
+  describe "#env" do
+    subject(:env) { rack.env }
+
+    it { is_expected.to include(::Hanami::Lambda::LAMBDA_EVENT) }
+    it { is_expected.to include(::Hanami::Lambda::LAMBDA_CONTEXT) }
+  end
 end

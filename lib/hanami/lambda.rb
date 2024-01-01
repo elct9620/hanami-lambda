@@ -10,6 +10,9 @@ module Hanami
   # @since 0.1.0
   # @api private
   module Lambda
+    LAMBDA_EVENT = "lambda.event"
+    LAMBDA_CONTEXT = "lambda.context"
+
     @_mutex = Mutex.new
 
     # Returns the Hanami::Lambda application.

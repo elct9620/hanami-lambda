@@ -43,7 +43,9 @@ module Hanami
           ::Rack::REQUEST_METHOD => event["httpMethod"],
           ::Rack::PATH_INFO => event["path"] || "",
           ::Rack::VERSION => ::Rack::VERSION,
-          ::Rack::RACK_INPUT => StringIO.new(event["body"] || "")
+          ::Rack::RACK_INPUT => StringIO.new(event["body"] || ""),
+          ::Hanami::Lambda::LAMBDA_EVENT => event,
+          ::Hanami::Lambda::LAMBDA_CONTEXT => context
         }
       end
     end
