@@ -11,6 +11,41 @@ module Hanami
   # @since 0.1.0
   # @api private
   module Lambda
+    @_mutex = Mutex.new
+
+    # Returns the Hanami::Lambda application.
+    #
+    # @return [Hanami::Lambda::Application] the application
+    # @raise [Hanami::AppLoadError] if the application isn't configured
+    #
+    # @api public
+    # @since 0.1.0
+    def app
+      @_mutex.synchronize do
+        unless defined?(@_app)
+          raise Hanami::AppLoadError,
+                "Hanami::Lambda.app is not yet configured. "
+        end
+
+        @_app
+      end
+    end
+
+    # @api private
+    # @since 0.1.0
+    def app=(klass)
+      @_mutex.synchronize do
+        raise AppLoadError, "Hanami::Lambda.app is already configured." if instance_variable_defined?(:@_app)
+
+        @_app = klass unless klass.name.nil?
+      end
+    end
+
+    def call(event:, context:)
+      Hanami.boot
+      app.call(event: event, context: context)
+    end
+
     # @since 0.1.0
     # @api private
     def self.gem_loader
