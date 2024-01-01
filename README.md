@@ -10,7 +10,7 @@ Hanami Lambda is a gem that provides a way to run hanami application on AWS Lamb
 
 ## Rubies
 
-**Hanami::Cucumber** supports Ruby (MRI) 3.0+
+**Hanami::Lambda** supports Ruby (MRI) 3.0+
 
 ## Installation
 
