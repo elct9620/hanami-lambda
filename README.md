@@ -1,24 +1,56 @@
-# Hanami::Lambda
+Hanami::Lambda
+===
 
-TODO: Delete this and the text below, and describe your gem
+Hanami Lambda is a gem that provides a way to run hanami application on AWS Lambda.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hanami/lambda`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Status
+
+[![Gem Version](https://badge.fury.io/rb/hanami-lambda.svg)](https://badge.fury.io/rb/hanami-lambda)
+[![CI](https://github.com/elct9620/hanami-lambda/actions/workflows/main.yml/badge.svg)](https://github.com/elct9620/hanami-lambda/actions/workflows/main.yml)
+
+## Rubies
+
+**Hanami::Cucumber** supports Ruby (MRI) 3.0+
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```ruby
+gem "hanami-lambda"
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+And then execute:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+```
+$ bundle install
+```
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Create `config/lambda.rb` with below content
+
+```ruby
+require 'hanami/lambda'
+
+module MyApp # Rename to your app name
+    class Lambda < Hanami::Lambda::Application
+    end
+end
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Use `config/lambda.Hanami::Lambda.call` as the function handler
+
+```yaml
+Resources:
+  ExampleHandler:
+    Type: AWS::Serverless::Function
+    Name: "example-api"
+    Properties:
+      CodeUri: .
+      Handler: config/lambda.Hanami::Lambda.call
+      Runtime: ruby3.2
+```
 
 ## Development
 
@@ -28,7 +60,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hanami-lambda.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elct9620/hanami-lambda.
 
 ## License
 
