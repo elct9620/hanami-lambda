@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rack"
+
 module Hanami
   module Lambda
     # Rack interface for AWS Lambda.
