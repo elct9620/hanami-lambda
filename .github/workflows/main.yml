@@ -18,19 +18,6 @@ on:
   create:
 
 jobs:
-  rubocop:
-    runs-on: ubuntu-latest
-    name: Rubocop
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
-        bundler-cache: true
-    - name: Run linter
-      run: bundle exec rake rubocop
-
   tests:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}

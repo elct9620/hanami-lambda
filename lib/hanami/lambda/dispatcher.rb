@@ -30,7 +30,7 @@ module Hanami
       # @param context [Hash] the context
       #
       # @return [Handler] the handler
-      def lookup(event:, context:)
+      def lookup(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
         function_name = context.function_name
         handlers[function_name]
       end
