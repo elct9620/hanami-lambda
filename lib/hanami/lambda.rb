@@ -19,7 +19,7 @@ module Hanami
     #
     # @api public
     # @since 0.1.0
-    def app
+    def self.app
       @_mutex.synchronize do
         unless defined?(@_app)
           raise Hanami::AppLoadError,
@@ -32,7 +32,7 @@ module Hanami
 
     # @api private
     # @since 0.1.0
-    def app=(klass)
+    def self.app=(klass)
       @_mutex.synchronize do
         raise AppLoadError, "Hanami::Lambda.app is already configured." if instance_variable_defined?(:@_app)
 
@@ -40,7 +40,9 @@ module Hanami
       end
     end
 
-    def call(event:, context:)
+    def self.call(event:, context:)
+      require "hanami/setup"
+
       Hanami.boot
       app.call(event: event, context: context)
     end
