@@ -9,13 +9,13 @@ module Hanami
     # @api private
     # @since 0.1.0
     class Rack
-      attr_reader :app, :event, :context
+      attr_reader :app
 
-      # @api private
-      def initialize(app, event:, context:)
+      # Initialize the Rack interface
+      #
+      # @since 0.1.0
+      def initialize(app)
         @app = app
-        @event = event
-        @context = context
       end
 
       # Handle the request
@@ -23,7 +23,8 @@ module Hanami
       # @return [Hash] the response
       #
       # @since 0.1.0
-      def call
+      def call(event:, context:)
+        env = build_env(event, context)
         status_code, headers, body = app.call(env)
 
         {
@@ -38,7 +39,7 @@ module Hanami
       # @return [Hash] the Rack environment
       #
       # @since 0.1.0
-      def env
+      def build_env(event, context)
         {
           ::Rack::REQUEST_METHOD => event["httpMethod"],
           ::Rack::PATH_INFO => event["path"] || "",

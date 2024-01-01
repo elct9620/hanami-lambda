@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Hanami::Lambda::Rack do
-  subject(:rack) { described_class.new(app, event: event, context: context) }
+  subject(:rack) { described_class.new(app) }
 
   let(:app) do
     lambda do |_env|
@@ -20,7 +20,7 @@ RSpec.describe Hanami::Lambda::Rack do
   let(:context) { double(:context) }
 
   describe "#call" do
-    subject(:call) { rack.call }
+    subject(:call) { rack.call(event: event, context: context) }
 
     it { is_expected.to include(statusCode: 200) }
     it { is_expected.to include(body: "Hello from Rack") }
@@ -28,7 +28,7 @@ RSpec.describe Hanami::Lambda::Rack do
   end
 
   describe "#env" do
-    subject(:env) { rack.env }
+    subject(:env) { rack.build_env(event, context) }
 
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_EVENT) }
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_CONTEXT) }
