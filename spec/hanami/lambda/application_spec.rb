@@ -1,14 +1,34 @@
 # frozen_string_literal: true
 
-RSpec.describe Hanami::Lambda::Application do
-  after do
-    Hanami::Lambda.remove_instance_variable(:@_app) if Hanami::Lambda.instance_variable_defined?(:@_app)
-  end
+require "tmpdir"
 
+RSpec.describe Hanami::Lambda::Application do
   subject(:app) do
     Class.new(described_class) do
       register "ExampleApi"
     end
+  end
+
+  around do |example|
+    tmpdir = Pathname.new(Dir.mktmpdir)
+    Dir.chdir(tmpdir) do
+      tmpdir.join("config").mkpath
+      tmpdir.join("config/app.rb").write <<~RUBY
+        require "hanami"
+
+        module TestApp
+          class App < Hanami::App
+          end
+        end
+      RUBY
+
+      example.run
+    end
+    FileUtils.rm_rf(tmpdir)
+  end
+
+  after do
+    Hanami::Lambda.remove_instance_variable(:@_app) if Hanami::Lambda.instance_variable_defined?(:@_app)
   end
 
   it { is_expected.to be_a(Hanami::Lambda::Application::ClassMethods) }

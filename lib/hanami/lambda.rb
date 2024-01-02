@@ -44,9 +44,6 @@ module Hanami
     end
 
     def self.call(event:, context:)
-      require "hanami/setup"
-
-      Hanami.boot
       app.call(event: event, context: context)
     end
 

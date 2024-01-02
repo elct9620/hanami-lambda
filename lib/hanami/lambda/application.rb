@@ -6,9 +6,13 @@ module Hanami
     #
     # @since 0.1.0
     class Application
+      @_mutex = Mutex.new
+
       # @api private
       def self.inherited(subclass)
         super
+
+        require "hanami/setup"
 
         Hanami::Lambda.app = subclass
         subclass.extend(ClassMethods)
@@ -47,11 +51,19 @@ module Hanami
           @dispatcher ||= build_dispatcher
         end
 
+        # Hanami application
+        #
+        # @api private
+        # @since 0.2.0
+        def app
+          Hanami.app
+        end
+
         # Build Dispatcher
         #
         # @api private
         def build_dispatcher
-          Dispatcher.new(Hanami.app).tap do |dispatcher|
+          Dispatcher.new(app).tap do |dispatcher|
             definitions.each do |(name, args, kwargs, block)|
               if block
                 dispatcher.register(name, *args, **kwargs, &block)
