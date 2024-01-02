@@ -6,11 +6,17 @@ module Hanami
     #
     # @api private
     class Dispatcher
+      # @since 0.2.0
+      # @api private
+      DEFAULT_RESOLVER = ->(to) { to }
+
       attr_reader :app, :handlers
 
-      def initialize(app)
+      # @since 0.2.0
+      def initialize(app, resolver: DEFAULT_RESOLVER)
         @app = app
         @handlers = {}
+        @resolver = resolver
       end
 
       # Call the handler

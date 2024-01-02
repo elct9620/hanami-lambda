@@ -18,14 +18,14 @@ module Hanami
     # Returns the Hanami::Lambda application.
     #
     # @return [Hanami::Lambda::Application] the application
-    # @raise [Hanami::AppLoadError] if the application isn't configured
+    # @raise [Hanami::Lambda::AppLoadError] if the application isn't configured
     #
     # @api public
     # @since 0.1.0
     def self.app
       @_mutex.synchronize do
         unless defined?(@_app)
-          raise Hanami::AppLoadError,
+          raise AppLoadError,
                 "Hanami::Lambda.app is not yet configured. "
         end
 
