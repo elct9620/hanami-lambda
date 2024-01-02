@@ -59,6 +59,13 @@ module Hanami
           Hanami.app
         end
 
+        # Boot the application
+        #
+        # @api private
+        def boot
+          app.boot
+        end
+
         # Build Dispatcher
         #
         # @api private

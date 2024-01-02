@@ -44,6 +44,7 @@ module Hanami
     end
 
     def self.call(event:, context:)
+      app.boot
       app.call(event: event, context: context)
     end
 

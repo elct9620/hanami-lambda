@@ -33,6 +33,21 @@ RSpec.describe Hanami::Lambda::Application do
 
   it { is_expected.to be_a(Hanami::Lambda::Application::ClassMethods) }
 
+  describe ".app" do
+    subject { app.app }
+
+    it { is_expected.to be_a(Hanami::App::ClassMethods) }
+  end
+
+  describe ".boot" do
+    subject(:boot) { app.boot }
+
+    it "is expected to boot Hanami" do
+      boot
+      expect(Hanami.app).to be_booted
+    end
+  end
+
   describe ".definitions" do
     subject(:definitions) { app.definitions }
 
