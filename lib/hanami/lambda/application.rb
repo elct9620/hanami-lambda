@@ -5,17 +5,23 @@ module Hanami
     # The application to configure for AWS Lambda.
     #
     # @since 0.1.0
-    class Application
+    class Application < Hanami::Slice
       @_mutex = Mutex.new
 
       # @api private
       def self.inherited(subclass)
         super
 
-        require "hanami/setup"
-
-        Hanami::Lambda.app = subclass
+        Hanami.app = subclass
+        subclass.extend(Hanami::App::ClassMethods)
         subclass.extend(ClassMethods)
+
+        @_mutex.synchronize do
+          subclass.class_eval do
+            @config = Hanami::Config.new(app_name: slice_name, env: Hanami.env)
+            Hanami::Env.load
+          end
+        end
       end
 
       module ClassMethods
@@ -49,21 +55,6 @@ module Hanami
         # @api private
         def dispatcher
           @dispatcher ||= build_dispatcher
-        end
-
-        # Hanami application
-        #
-        # @api private
-        # @since 0.2.0
-        def app
-          Hanami.app
-        end
-
-        # Boot the application
-        #
-        # @api private
-        def boot
-          app.boot
         end
 
         # Build Dispatcher

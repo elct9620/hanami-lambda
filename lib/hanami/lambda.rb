@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "zeitwerk"
+require "hanami"
 
 # @see Hanami::Lambda
 # @since 0.1.0
@@ -15,34 +16,19 @@ module Hanami
 
     @_mutex = Mutex.new
 
-    # Returns the Hanami::Lambda application.
-    #
-    # @return [Hanami::Lambda::Application] the application
-    # @raise [Hanami::Lambda::AppLoadError] if the application isn't configured
+    # Return the application
     #
     # @api public
     # @since 0.1.0
+    #
+    # @return [Hanami::Lambda::Application] the application
     def self.app
-      @_mutex.synchronize do
-        unless defined?(@_app)
-          raise AppLoadError,
-                "Hanami::Lambda.app is not yet configured. "
-        end
-
-        @_app
-      end
+      Hanami.app
     end
 
-    # @api private
-    # @since 0.1.0
-    def self.app=(klass)
-      @_mutex.synchronize do
-        raise AppLoadError, "Hanami::Lambda.app is already configured." if instance_variable_defined?(:@_app)
-
-        @_app = klass unless klass.name.nil?
-      end
-    end
-
+    # Run the application
+    #
+    # @api public
     def self.call(event:, context:)
       app.boot
       app.call(event: event, context: context)
