@@ -50,7 +50,7 @@ module Hanami
       #
       # @since 0.2.0
       def register(name, ...)
-        handlers[name] = Rack.new(app)
+        handlers[name] = Rack.new(app.rack_app)
       end
     end
   end

@@ -3,14 +3,22 @@
 require "tmpdir"
 
 RSpec.describe Hanami::Lambda::Application do
-  subject(:app) do
-    Class.new(described_class) do
-      register "ExampleApi"
+  subject(:app) { Hanami.app }
+
+  around do |example|
+    module Example
+      class Application < Hanami::Lambda::Application
+        register "ExampleApi"
+      end
     end
+
+    example.run
+
+    Object.send(:remove_const, :Example)
   end
 
   after do
-    Hanami::Lambda.remove_instance_variable(:@_app) if Hanami::Lambda.instance_variable_defined?(:@_app)
+    Hanami.remove_instance_variable(:@_app) if Hanami.instance_variable_defined?(:@_app)
   end
 
   it { is_expected.to be_a(Hanami::Slice::ClassMethods) }
@@ -44,7 +52,7 @@ RSpec.describe Hanami::Lambda::Application do
     let(:context) { double(:context, function_name: "ExampleApi") }
 
     before do
-      allow(app).to receive(:app).and_return(rack_app)
+      allow(app).to receive(:rack_app).and_return(rack_app)
     end
 
     it { is_expected.to include(statusCode: 200) }
