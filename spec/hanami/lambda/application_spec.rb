@@ -15,9 +15,6 @@ RSpec.describe Hanami::Lambda::Application do
     example.run
 
     Object.send(:remove_const, :Example)
-  end
-
-  after do
     Hanami.remove_instance_variable(:@_app) if Hanami.instance_variable_defined?(:@_app)
   end
 

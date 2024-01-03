@@ -10,13 +10,14 @@ module Hanami
       # @api private
       DEFAULT_RESOLVER = ->(to) { to }
 
-      attr_reader :app, :handlers
+      attr_reader :app, :handlers, :default
 
       # @since 0.2.0
       def initialize(app, resolver: DEFAULT_RESOLVER)
         @app = app
         @handlers = {}
         @resolver = resolver
+        @default = Rack.new(app.rack_app)
       end
 
       # Call the handler
@@ -27,6 +28,8 @@ module Hanami
       # @since 0.2.0
       def call(event:, context:)
         handler = lookup(event: event, context: context)
+        return default.call(event: event, context: context) unless handler
+
         handler.call(event: event, context: context)
       end
 
