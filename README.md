@@ -32,8 +32,17 @@ Create `config/lambda.rb` with below content
 require 'hanami/lambda'
 
 module MyApp # Rename to your app name
-    class Lambda < Hanami::Lambda::Application
-    end
+  class Lambda < Hanami::Lambda::Application
+  end
+end
+```
+
+Create `app/function.rb` as handler base class
+
+```ruby
+module MyApp
+  class Function < Hanami::Lambda::Function
+  end
 end
 ```
 
@@ -44,6 +53,7 @@ end
 Use `config/lambda.Hanami::Lambda.call` as the function handler
 
 ```yaml
+# AWS SAM
 Resources:
   ExampleHandler:
     Type: AWS::Serverless::Function
@@ -54,7 +64,31 @@ Resources:
       Runtime: ruby3.2
 ```
 
-> Currently, the only `APIGateWay` event is supported
+### Delegate
+
+If the lambda function isn't trigger by APIGateway, we can use `delegate` method to define the handler function.
+
+```ruby
+module MyApp
+  class Lambda < Hanami::Lambda::Application
+    delegate "example-api", to: "daily_task"
+  end
+end
+```
+
+Add `app/functions/daily_task.rb` to define the handle action
+
+```ruby
+module MyApp
+  module Functions
+    class DailyTask < MyApp::Function
+      def handle(event, context)
+        # ...
+      end
+    end
+  end
+end
+```
 
 ## Development
 
