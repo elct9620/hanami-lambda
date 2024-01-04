@@ -61,7 +61,7 @@ module Hanami
         #
         # @api private
         def build_dispatcher
-          Dispatcher.new(app).tap do |dispatcher|
+          Dispatcher.new(rack_app: app.rack_app).tap do |dispatcher|
             definitions.each do |(name, args, kwargs, block)|
               if block
                 dispatcher.register(name, *args, **kwargs, &block)

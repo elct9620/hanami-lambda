@@ -10,14 +10,13 @@ module Hanami
       # @api private
       DEFAULT_RESOLVER = ->(to) { to }
 
-      attr_reader :app, :handlers, :default
+      attr_reader :rack_app, :handlers, :default
 
       # @since 0.2.0
-      def initialize(app, resolver: DEFAULT_RESOLVER)
-        @app = app
+      def initialize(rack_app:, resolver: DEFAULT_RESOLVER)
         @handlers = {}
         @resolver = resolver
-        @default = Rack.new(app.rack_app)
+        @default = Rack.new(rack_app)
       end
 
       # Call the handler
@@ -52,8 +51,13 @@ module Hanami
       # @param block [Proc] the block to pass to the handler
       #
       # @since 0.2.0
-      def register(name, ...)
-        handlers[name] = Rack.new(app.rack_app)
+      def register(name, to: nil)
+        handlers[name] =
+          if to.nil?
+            @default
+          else
+            resolver.resolve(to)
+          end
       end
     end
   end
