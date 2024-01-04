@@ -6,6 +6,9 @@ module Hanami
     #
     # @since 0.1.0
     class Application < Hanami::Slice
+      # @since 0.2.0
+      HANDLER_KEY_NAMESPACE = "functions"
+
       @_mutex = Mutex.new
 
       # @api private
@@ -61,7 +64,10 @@ module Hanami
         #
         # @api private
         def build_dispatcher
-          Dispatcher.new(rack_app: app.rack_app).tap do |dispatcher|
+          Dispatcher.new(rack_app: app.rack_app,
+                         resolver: ->(to) {
+                                     app.resolve("#{HANDLER_KEY_NAMESPACE}.#{to}")
+                                   }).tap do |dispatcher|
             definitions.each do |(name, args, kwargs, block)|
               if block
                 dispatcher.register(name, *args, **kwargs, &block)
