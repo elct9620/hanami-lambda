@@ -8,7 +8,7 @@ RSpec.describe Hanami::Lambda::Application do
   around do |example|
     module Example
       class Application < Hanami::Lambda::Application
-        register "ExampleApi"
+        delegate "ExampleApi"
       end
     end
 
@@ -28,11 +28,11 @@ RSpec.describe Hanami::Lambda::Application do
     it { is_expected.to include(["ExampleApi", [], {}, nil]) }
   end
 
-  describe ".register" do
-    subject(:register) { app.register("ExampleApi") }
+  describe ".delegate" do
+    subject(:delegate) { app.delegate("ExampleApi") }
 
     it "registers the application" do
-      expect { register }.to change { app.definitions.size }.by(1)
+      expect { delegate }.to change { app.definitions.size }.by(1)
     end
   end
 

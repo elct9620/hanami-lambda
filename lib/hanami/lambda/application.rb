@@ -40,13 +40,13 @@ module Hanami
           @definitions ||= []
         end
 
-        # Register a handler
+        # Define function delegate action
         #
         # @param name [String] the name of the handler
         # @param args [Array] the arguments to pass to the handler
         # @param kwargs [Hash] the keyword arguments to pass to the handler
         # @param block [Proc] the block to pass to the handler
-        def register(name, *args, **kwargs, &block)
+        def delegate(name, *args, **kwargs, &block)
           definitions << [name, args, kwargs, block]
         end
 
