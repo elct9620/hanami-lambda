@@ -10,7 +10,7 @@ module Hanami
       # @api private
       DEFAULT_RESOLVER = ->(to) { to }
 
-      attr_reader :rack_app, :handlers, :default
+      attr_reader :rack_app, :handlers, :default, :resolver
 
       # @since 0.2.0
       def initialize(rack_app:, resolver: DEFAULT_RESOLVER)
@@ -56,7 +56,7 @@ module Hanami
           if to.nil?
             @default
           else
-            resolver.resolve(to)
+            resolver.call(to)
           end
       end
     end

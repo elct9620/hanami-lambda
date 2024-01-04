@@ -25,7 +25,7 @@ RSpec.describe Hanami::Lambda::Dispatcher do
       }
       let(:resolver) do
         ->(to) do
-          lambda { "Handled target is #{to}" }
+          lambda { |**_kwargs| "Handled target is #{to}" }
         end
       end
       let(:context) { double(:context, function_name: "Resolved") }
