@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "zeitwerk"
+require "dry-struct"
 require "hanami"
 
 # @see Hanami::Lambda
