@@ -15,19 +15,33 @@ module Hanami
       def self.inherited(subclass)
         super
 
+        subclass.extend ClassMethods
+
         if instance_variable_defined?(:@event_type)
           subclass.instance_variable_set(:@event_type, @event_type)
         end
       end
 
-      # Return the class which define the event type
-      #
-      # @return [Class] the class which define the event type
-      #
-      # @since 0.2.0
-      # @api private
-      def self.event_type
-        @event_type || Event
+      module ClassMethods
+        # Return the class which define the event type
+        #
+        # @return [Class] the class which define the event type
+        #
+        # @since 0.2.0
+        # @api private
+        def event_type
+          @event_type || Event
+        end
+
+        # Define the event type
+        #
+        # @param klass [Class] the class which define the event type
+        #
+        # @since 0.2.0
+        # @api private
+        def type(klass)
+          @event_type = klass
+        end
       end
 
       # @since 0.2.0
