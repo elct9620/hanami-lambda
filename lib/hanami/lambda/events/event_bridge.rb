@@ -14,7 +14,7 @@ module Hanami
         attribute :time, Types::Time
         attribute :region, Types::String
         attribute :resources, Types::Array.of(Types::String)
-        attribute :detail, Types::Hash
+        attribute :detail, Types::String
       end
     end
   end
