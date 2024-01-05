@@ -35,6 +35,22 @@ module Hanami
       app.call(event: event, context: context)
     end
 
+    # Inflector to convert event key
+    #
+    # @return [Dry::Inflector]
+    #
+    # @since 0.2.0
+    # @api private
+    def self.inflector
+      @_mutex.synchronize do
+        return @inflector if defined?(@inflector)
+
+        @inflector ||= Dry::Inflector.new
+      end
+
+      @inflector
+    end
+
     # @since 0.1.0
     # @api private
     def self.gem_loader

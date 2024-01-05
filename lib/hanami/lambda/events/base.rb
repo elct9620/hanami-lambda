@@ -5,7 +5,7 @@ module Hanami
     module Events
       class Base < Dry::Struct
         transform_keys do |key|
-          key.gsub("-", "_").to_sym
+          Hanami::Lambda.inflector.underscore(key).to_sym
         end
       end
     end
