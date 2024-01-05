@@ -34,5 +34,21 @@ RSpec.describe Hanami::Lambda::Dispatcher do
 
       it { is_expected.to eq("Handled target is mocked") }
     end
+
+    context "with generated function name" do
+      let(:dispatcher) {
+        described_class.new(rack_app: rack_app, resolver: resolver)
+      }
+      let(:resolver) do
+        ->(to) do
+          lambda { |**_kwargs| "Handled target is #{to}" }
+        end
+      end
+      let(:context) { double(:context, function_name: "my-sam-app-Generated-r8faNAo3iUqx") }
+
+      before { dispatcher.register("Generated", to: "generated") }
+
+      it { is_expected.to eq("Handled target is generated") }
+    end
   end
 end
