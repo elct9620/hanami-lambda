@@ -3,9 +3,7 @@
 module Hanami
   module Lambda
     module Events
-      class EventBridge < Dry::Struct
-        transform_keys(&:to_sym)
-
+      class EventBridge < Base
         attribute :version, Types::Integer
         attribute :id, Types::String
         attribute :detail_type, Types::String
