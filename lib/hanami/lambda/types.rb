@@ -4,6 +4,8 @@ require "dry-struct"
 
 module Hanami
   module Lambda
-    include Dry.Types()
+    module Types
+      include Dry.Types()
+    end
   end
 end
