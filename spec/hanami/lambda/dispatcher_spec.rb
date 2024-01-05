@@ -46,7 +46,10 @@ RSpec.describe Hanami::Lambda::Dispatcher do
       end
       let(:context) { double(:context, function_name: "my-sam-app-Generated-r8faNAo3iUqx") }
 
-      before { dispatcher.register("Generated", to: "generated") }
+      before do
+        dispatcher.register("Generated", to: "generated")
+        dispatcher.register("Generate", to: "generate")
+      end
 
       it { is_expected.to eq("Handled target is generated") }
     end

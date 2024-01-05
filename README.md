@@ -55,9 +55,8 @@ Use `config/lambda.Hanami::Lambda.call` as the function handler
 ```yaml
 # AWS SAM
 Resources:
-  ExampleHandler:
+  MyFunction:
     Type: AWS::Serverless::Function
-    Name: "example-api"
     Properties:
       CodeUri: .
       Handler: config/lambda.Hanami::Lambda.call
@@ -71,10 +70,12 @@ If the lambda function isn't trigger by APIGateway, we can use `delegate` method
 ```ruby
 module MyApp
   class Lambda < Hanami::Lambda::Application
-    delegate "example-api", to: "daily_task"
+    delegate "MyFunction", to: "daily_task"
   end
 end
 ```
+
+> The IaC generated function will be `my-app-MyFunction-r8faNAo3iUqx` therefore the dispatcher will use include `MyFunction` to find targeted function
 
 Add `app/functions/daily_task.rb` to define the handle action
 
