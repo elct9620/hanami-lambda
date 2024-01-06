@@ -15,9 +15,6 @@ module Hanami
     LAMBDA_EVENT = "lambda.event"
     LAMBDA_CONTEXT = "lambda.context"
 
-    LIB_DIR = "lib"
-    private_constant :LIB_DIR
-
     @_mutex = Mutex.new
 
     # Return the application
@@ -34,18 +31,8 @@ module Hanami
     #
     # @api public
     def self.call(event:, context:)
-      prepare_load_path
       app.boot
       app.call(event: event, context: context)
-    end
-
-    # Prepare the load path
-    #
-    # @since 0.2.0
-    # @api private
-    private_class_method def self.prepare_load_path
-      lib_path = File.join(Dir.pwd, LIB_DIR)
-      $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
     end
 
     # Inflector to convert event key

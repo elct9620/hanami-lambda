@@ -22,6 +22,7 @@ module Hanami
         @_mutex.synchronize do
           subclass.class_eval do
             @config = Hanami::Config.new(app_name: slice_name, env: Hanami.env)
+            prepare_load_path
             Hanami::Env.load
           end
         end
