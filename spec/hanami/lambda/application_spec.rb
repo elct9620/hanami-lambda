@@ -36,8 +36,8 @@ RSpec.describe Hanami::Lambda::Application do
     end
   end
 
-  describe ".call" do
-    subject(:call) { app.call(event: event, context: context) }
+  describe ".handle_lambda" do
+    subject(:call) { app.handle_lambda(event: event, context: context) }
 
     let(:rack_app) do
       lambda do |_env|

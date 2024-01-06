@@ -33,7 +33,7 @@ module Hanami
         #
         # @api private
         # @since 0.1.0
-        def call(event:, context:)
+        def handle_lambda(event:, context:)
           dispatcher.call(event: event, context: context)
         end
 

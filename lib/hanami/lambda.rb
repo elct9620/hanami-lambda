@@ -32,7 +32,7 @@ module Hanami
     # @api public
     def self.call(event:, context:)
       app.boot
-      app.call(event: event, context: context)
+      app.handle_lambda(event: event, context: context)
     end
 
     # Inflector to convert event key
