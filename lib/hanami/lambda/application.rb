@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "hanami/constants"
+require "hanami/env"
+
 module Hanami
   module Lambda
     # The application to configure for AWS Lambda.
