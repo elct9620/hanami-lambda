@@ -29,10 +29,12 @@ $ bundle install
 Create `config/lambda.rb` with below content
 
 ```ruby
+require 'hanami'
 require 'hanami/lambda'
 
 module MyApp # Rename to your app name
-  class Lambda < Hanami::Lambda::Application
+  class Lambda < Hanami::App
+    extend Hanami::Lambda::Application
   end
 end
 ```

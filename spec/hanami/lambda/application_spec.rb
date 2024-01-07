@@ -7,7 +7,8 @@ RSpec.describe Hanami::Lambda::Application do
 
   around do |example|
     module Example
-      class Application < Hanami::Lambda::Application
+      class Application < Hanami::App
+        extend Hanami::Lambda::Application
         delegate "ExampleApi"
       end
     end
@@ -18,9 +19,7 @@ RSpec.describe Hanami::Lambda::Application do
     Hanami.remove_instance_variable(:@_app) if Hanami.instance_variable_defined?(:@_app)
   end
 
-  it { is_expected.to be_a(Hanami::Slice::ClassMethods) }
-  it { is_expected.to be_a(Hanami::App::ClassMethods) }
-  it { is_expected.to be_a(Hanami::Lambda::Application::ClassMethods) }
+  it { is_expected.to be_a(Hanami::Lambda::Application) }
 
   describe ".definitions" do
     subject(:definitions) { app.definitions }
