@@ -8,6 +8,14 @@ module Hanami
     #
     # @since 0.1.0
     module Application
+      # @since 0.2.0
+      # @api private
+      def self.extended(base)
+        base.class_eval do
+          prepare_load_path if respond_to?(:prepare_load_path)
+        end
+      end
+
       # Dispatch event to the handler
       #
       # @api private
