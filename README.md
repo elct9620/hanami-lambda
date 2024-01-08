@@ -26,7 +26,7 @@ And then execute:
 $ bundle install
 ```
 
-Create `config/lambda.rb` with below content
+Update `config/app.rb` with below content
 
 ```ruby
 require 'hanami'
@@ -69,9 +69,11 @@ Resources:
 
 If the lambda function isn't trigger by APIGateway, we can use `delegate` method to define the handler function.
 
+Create `config/lambda.rb` with below content
+
 ```ruby
 module MyApp
-  class Lambda < Hanami::Lambda::Application
+  class Lambda < Hanami::Lambda::Dispatcher
     delegate "MyFunction", to: "daily_task"
   end
 end
