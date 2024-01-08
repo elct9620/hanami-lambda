@@ -62,6 +62,40 @@ module Hanami
             resolver.call(to)
           end
       end
+
+      class << self
+        # Definitions of handlers
+        #
+        # @api private
+        def definitions
+          @definitions ||= []
+        end
+
+        # Define function delegate action
+        #
+        # @param name [String] the name of the handler
+        # @param args [Array] the arguments to pass to the handler
+        # @param kwargs [Hash] the keyword arguments to pass to the handler
+        # @param block [Proc] the block to pass to the handler
+        def delegate(name, *args, **kwargs, &block)
+          definitions << [name, args, kwargs, block]
+        end
+
+        # Build Dispatcher
+        #
+        # @api private
+        def build(rack_app:, resolver:)
+          new(rack_app: rack_app, resolver: resolver).tap do |dispatcher|
+            definitions.each do |(name, args, kwargs, block)|
+              if block
+                dispatcher.register(name, *args, **kwargs, &block)
+              else
+                dispatcher.register(name, *args, **kwargs)
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

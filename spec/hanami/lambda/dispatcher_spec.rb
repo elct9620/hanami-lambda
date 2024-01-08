@@ -9,6 +9,19 @@ RSpec.describe Hanami::Lambda::Dispatcher do
     end
   end
 
+  describe ".definitions" do
+    subject(:definitions) { described_class.definitions }
+
+    it { is_expected.to be_a(Array) }
+    it { is_expected.to have_attributes(size: 0) }
+  end
+
+  describe ".delegate" do
+    subject(:delegate) { described_class.delegate("ExampleApi") }
+
+    it { expect { delegate }.to change { described_class.definitions.size }.by(1) }
+  end
+
   describe "#call" do
     subject(:call) { dispatcher.call(event: event, context: context) }
 

@@ -21,49 +21,44 @@ module Hanami
       # @api private
       # @since 0.1.0
       def handle_lambda(event:, context:)
-        dispatcher.call(event: event, context: context)
+        lambda_dispatcher.call(event: event, context: context)
       end
 
-      # Definitions of handlers
+      # Get lambda dispatcher
       #
+      # @return [Hanami::Lambda::Dispatcher] the dispatcher
+      #
+      # @since 0.1.0
+      def lambda_dispatcher
+        @lambda_dispatcher ||= load_lambda_dispatcher
+      end
+
+      # Load lambda dispatcher
+      #
+      # @return [Hanami::Lambda::Dispatcher] the dispatcher
+      #
+      # @since 0.2.0
       # @api private
-      def definitions
-        @definitions ||= []
-      end
+      def load_lambda_dispatcher
+        if root.directory?
+          dispatcher_path = File.join(root, LAMBDA_CONFIG_PATH)
 
-      # Define function delegate action
-      #
-      # @param name [String] the name of the handler
-      # @param args [Array] the arguments to pass to the handler
-      # @param kwargs [Hash] the keyword arguments to pass to the handler
-      # @param block [Proc] the block to pass to the handler
-      def delegate(name, *args, **kwargs, &block)
-        definitions << [name, args, kwargs, block]
-      end
+          begin
+            require dispatcher_path
+          rescue LoadError => exception
+            raise exception unless exception.path == dispatcher_path
+          end
+        end
 
-      # Dispatcher
-      #
-      # @api private
-      def dispatcher
-        @dispatcher ||= build_dispatcher
-      end
-
-      # Build Dispatcher
-      #
-      # @api private
-      def build_dispatcher
-        Dispatcher.new(rack_app: app.rack_app,
-                       resolver: ->(to) {
-                         app.resolve("#{HANDLER_KEY_NAMESPACE}.#{to}")
-                       }).tap do |dispatcher|
-                         definitions.each do |(name, args, kwargs, block)|
-                           if block
-                             dispatcher.register(name, *args, **kwargs, &block)
-                           else
-                             dispatcher.register(name, *args, **kwargs)
-                           end
-                         end
-                       end
+        begin
+          dispatcher_class = namespace.const_get(LAMBDA_CLASS_NAME)
+          dispatcher_class.build(
+            rack_app: app.rack_app,
+            resolver: ->(to) { app.resolve("#{HANDLER_KEY_NAMESPACE}.#{to}") }
+          )
+        rescue NameError => exception
+          raise exception unless exception.name == LAMBDA_CLASS_NAME
+        end
       end
     end
   end

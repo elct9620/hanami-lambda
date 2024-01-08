@@ -6,34 +6,32 @@ RSpec.describe Hanami::Lambda::Application do
   subject(:app) { Hanami.app }
 
   around do |example|
-    module Example
-      class Application < Hanami::App
-        extend Hanami::Lambda::Application
-        delegate "ExampleApi"
+    tmpdir = Dir.mktmpdir
+    Dir.chdir(tmpdir) do
+      Pathname.new(tmpdir).join("config").mkpath
+
+      File.write "config/lambda.rb", <<~RUBY
+        module Example
+          class Lambda < Hanami::Lambda::Dispatcher
+            delegate "ExampleApi"
+          end
+        end
+      RUBY
+
+      module Example
+        class Application < Hanami::App
+          extend Hanami::Lambda::Application
+        end
       end
+
+      example.run
     end
 
-    example.run
-
-    Object.send(:remove_const, :Example)
+    Object.send(:remove_const, :Example) if Object.const_defined?(:Example)
     Hanami.remove_instance_variable(:@_app) if Hanami.instance_variable_defined?(:@_app)
   end
 
   it { is_expected.to be_a(Hanami::Lambda::Application) }
-
-  describe ".definitions" do
-    subject(:definitions) { app.definitions }
-
-    it { is_expected.to include(["ExampleApi", [], {}, nil]) }
-  end
-
-  describe ".delegate" do
-    subject(:delegate) { app.delegate("ExampleApi") }
-
-    it "registers the application" do
-      expect { delegate }.to change { app.definitions.size }.by(1)
-    end
-  end
 
   describe ".handle_lambda" do
     subject(:call) { app.handle_lambda(event: event, context: context) }

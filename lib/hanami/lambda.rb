@@ -12,8 +12,17 @@ module Hanami
   # @since 0.1.0
   # @api private
   module Lambda
+    # @since 0.1.0
     LAMBDA_EVENT = "lambda.event"
+
+    # @since 0.1.0
     LAMBDA_CONTEXT = "lambda.context"
+
+    # @since 0.2.0
+    LAMBDA_CONFIG_PATH = File.join("config", "lambda")
+
+    # @since 0.2.0
+    LAMBDA_CLASS_NAME = "Lambda"
 
     @_mutex = Mutex.new
 
