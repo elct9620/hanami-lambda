@@ -39,7 +39,7 @@ module Hanami
       #
       # @return [Handler] the handler
       def lookup(event:, context:) # rubocop:disable Lint/UnusedMethodArgument
-        function_name = context.function_name
+        function_name = ENV.fetch("AWS_LAMBDA_FUNCTION_NAME", context.function_name)
         handlers
           .select { |name, _| function_name.include?(name) }
           .max_by { |name, _| name.length }
