@@ -9,4 +9,13 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: %i[spec rubocop]
+task :steep do
+  # Steep doesn't provide Rake integration yet,
+  # but can do that ourselves
+  require "steep"
+  require "steep/cli"
+
+  Steep::CLI.new(argv: ["check"], stdout: $stdout, stderr: $stderr, stdin: $stdin).run
+end
+
+task default: %i[spec rubocop steep]
