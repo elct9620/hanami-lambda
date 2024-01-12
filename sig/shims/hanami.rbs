@@ -1,0 +1,23 @@
+module Hanami
+  def self.app: () -> App
+
+  class App
+    extend _App
+
+    def resolve: (String) -> untyped
+    def rack_app: () -> _Rack
+  end
+
+  interface _App
+    def root: () -> (Pathname & _ToStr)
+    def app: () -> App
+    def namespace: () -> Module
+    def prepare_load_path: () -> void
+  end
+
+  module Utils
+    class Hash
+      def self.deep_symbolize: (::Hash[String, String]) -> ::Hash[Symbol, String]
+    end
+  end
+end

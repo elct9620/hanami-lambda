@@ -1,0 +1,42 @@
+module Hanami
+  module Lambda
+    # The base class for handler
+    #
+    # @since 0.2.0
+    class Function
+      extend ClassMethods
+      # Override the Ruby's hook for modules
+      #
+      # @param base [Class] the target class
+      #
+      # @since 0.2.0
+      # @api private
+      def self.inherited: (untyped subclass) -> untyped
+
+      module ClassMethods
+        @event_type: untyped
+
+        # Return the class which define the event type
+        #
+        # @return [Class] the class which define the event type
+        #
+        # @since 0.2.0
+        # @api private
+        def event_type: () -> untyped
+
+        # Define the event type
+        #
+        # @param klass [Class] the class which define the event type
+        #
+        # @since 0.2.0
+        # @api private
+        def type: (untyped klass) -> untyped
+      end
+
+      # @since 0.2.0
+      def call: (event: untyped, context: untyped) -> untyped
+
+      def handle: (untyped _event, untyped _context) -> nil
+    end
+  end
+end

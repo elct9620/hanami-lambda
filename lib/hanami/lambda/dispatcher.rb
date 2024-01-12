@@ -54,7 +54,7 @@ module Hanami
       # @param block [Proc] the block to pass to the handler
       #
       # @since 0.2.0
-      def register(name, to: nil)
+      def register(name, *_args, to: nil)
         handlers[name] =
           if to.nil?
             @default

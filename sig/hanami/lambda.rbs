@@ -1,6 +1,52 @@
+# @see Hanami::Lambda
+# @since 0.1.0
 module Hanami
+  # Make Hanami can be run on AWS Lambda.
+  #
+  # @since 0.1.0
+  # @api private
   module Lambda
     VERSION: String
-    # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+    self.@_mutex: untyped
+
+    self.@gem_loader: untyped
+
+    # @since 0.1.0
+    LAMBDA_EVENT: "lambda.event"
+
+    # @since 0.1.0
+    LAMBDA_CONTEXT: "lambda.context"
+
+    # @since 0.2.0
+    LAMBDA_CONFIG_PATH: untyped
+
+    # @since 0.2.0
+    LAMBDA_CLASS_NAME: "Lambda"
+
+    # Return the application
+    #
+    # @api public
+    # @since 0.1.0
+    #
+    # @return [Hanami::Lambda::Application] the application
+    def self.app: () -> untyped
+
+    # Run the application
+    #
+    # @api public
+    def self.call: (event: untyped, context: untyped) -> untyped
+
+    # Inflector to convert event key
+    #
+    # @return [Dry::Inflector]
+    #
+    # @since 0.2.0
+    # @api private
+    def self.inflector: () -> untyped
+
+    # @since 0.1.0
+    # @api private
+    def self.gem_loader: () -> untyped
   end
 end

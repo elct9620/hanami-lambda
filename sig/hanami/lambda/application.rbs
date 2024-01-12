@@ -1,0 +1,40 @@
+module Hanami
+  module Lambda
+    HANDLER_KEY_NAMESPACE: "functions"
+
+    # The application to configure for AWS Lambda.
+    #
+    # @since 0.1.0
+    module Application
+      include Hanami::_App
+      extend Hanami::_App
+
+      @lambda_dispatcher: untyped
+
+      # @since 0.2.0
+      # @api private
+      def self.extended: (Class base) -> untyped
+
+      # Dispatch event to the handler
+      #
+      # @api private
+      # @since 0.1.0
+      def handle_lambda: (event: untyped, context: untyped) -> untyped
+
+      # Get lambda dispatcher
+      #
+      # @return [Hanami::Lambda::Dispatcher] the dispatcher
+      #
+      # @since 0.1.0
+      def lambda_dispatcher: () -> untyped
+
+      # Load lambda dispatcher
+      #
+      # @return [Hanami::Lambda::Dispatcher] the dispatcher
+      #
+      # @since 0.2.0
+      # @api private
+      def load_lambda_dispatcher: () -> untyped
+    end
+  end
+end

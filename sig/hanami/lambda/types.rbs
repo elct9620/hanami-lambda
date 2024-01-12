@@ -1,0 +1,18 @@
+module Hanami
+  module Lambda
+    module Types
+      class String
+      end
+
+      class Array
+        def self.of: (Dry::_Type) -> untyped
+      end
+
+      class Time
+      end
+
+      class Integer
+      end
+    end
+  end
+end

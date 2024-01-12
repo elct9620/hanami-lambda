@@ -1,0 +1,14 @@
+module Dry
+  interface _Type
+  end
+
+  def self.Types: (?default: Symbol) -> Module
+
+  class Struct
+    def self.transform_keys: () ?{ (String) -> (String | Symbol)  } -> untyped
+    def self.attribute: (Symbol, _Type) -> untyped
+  end
+
+  class Inflector
+  end
+end

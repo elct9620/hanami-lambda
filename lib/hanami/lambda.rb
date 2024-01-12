@@ -64,7 +64,7 @@ module Hanami
     # @api private
     def self.gem_loader
       @gem_loader ||= Zeitwerk::Loader.new.tap do |loader|
-        root = File.expand_path("..", __dir__)
+        root = File.expand_path("..", __dir__ || "")
         loader.tag = "hanami-lambda"
         loader.inflector = Zeitwerk::GemInflector.new("#{root}/hanami-lambda.rb")
         loader.push_dir(root)

@@ -1,0 +1,16 @@
+module Zeitwerk
+  class GemInflector
+    def initialize: (String) -> untyped
+    def inflect: (Hash[String, String]) -> untyped
+  end
+
+  class Loader
+    attr_reader inflector: GemInflector
+
+    attr_writer inflector: GemInflector
+    attr_writer tag: String
+
+    def ignore: (*String) -> untyped
+    def push_dir: (String) -> untyped
+  end
+end

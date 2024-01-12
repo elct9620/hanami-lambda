@@ -1,0 +1,8 @@
+module Hanami
+  module Lambda
+    module Events
+      class EventBridge < Base
+      end
+    end
+  end
+end

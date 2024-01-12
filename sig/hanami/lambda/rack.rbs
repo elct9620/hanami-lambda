@@ -1,0 +1,32 @@
+module Hanami
+  module Lambda
+    # Rack interface for AWS Lambda.
+    #
+    # @api private
+    # @since 0.1.0
+    class Rack
+      @app: untyped
+
+      attr_reader app: untyped
+
+      # Initialize the Rack interface
+      #
+      # @since 0.1.0
+      def initialize: (untyped app) -> void
+
+      # Handle the request
+      #
+      # @return [Hash] the response
+      #
+      # @since 0.1.0
+      def call: (event: untyped, context: untyped) -> { statusCode: untyped, headers: untyped, body: untyped }
+
+      # Build the Rack environment
+      #
+      # @return [Hash] the Rack environment
+      #
+      # @since 0.1.0
+      def build_env: (untyped event, untyped context) -> ::Hash[untyped, untyped]
+    end
+  end
+end

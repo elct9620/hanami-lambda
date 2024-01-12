@@ -1,0 +1,8 @@
+module Hanami
+  module Lambda
+    module Events
+      class Base < Dry::Struct
+      end
+    end
+  end
+end

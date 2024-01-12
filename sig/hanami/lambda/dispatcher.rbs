@@ -1,0 +1,75 @@
+module Hanami
+  module Lambda
+    # Dispatch Event to the Handler
+    #
+    # @api private
+    class Dispatcher
+      self.@definitions: untyped
+
+      @handlers: untyped
+
+      @resolver: untyped
+
+      @default: untyped
+
+      # @since 0.2.0
+      # @api private
+      DEFAULT_RESOLVER: untyped
+
+      attr_reader rack_app: untyped
+
+      attr_reader handlers: untyped
+
+      attr_reader default: untyped
+
+      attr_reader resolver: untyped
+
+      # @since 0.2.0
+      def initialize: (rack_app: untyped, ?resolver: untyped) -> void
+
+      # Call the handler
+      #
+      # @param event [Hash] the event
+      # @param context [Hash] the context
+      #
+      # @since 0.2.0
+      def call: (event: untyped, context: untyped) -> untyped
+
+      # Lookup the handler
+      #
+      # @param event [Hash] the event
+      # @param context [Hash] the context
+      #
+      # @return [Handler] the handler
+      def lookup: (event: untyped, context: untyped) -> untyped
+
+      # Register a handler
+      #
+      # @param name [String] the name of the handler
+      # @param args [Array] the arguments to pass to the handler
+      # @param kwargs [Hash] the keyword arguments to pass to the handler
+      # @param block [Proc] the block to pass to the handler
+      #
+      # @since 0.2.0
+      def register: (String name, *Array[untyped] args, ?to: String?) -> nil
+
+      # Definitions of handlers
+      #
+      # @api private
+      def self.definitions: () -> untyped
+
+      # Define function delegate action
+      #
+      # @param name [String] the name of the handler
+      # @param args [Array] the arguments to pass to the handler
+      # @param kwargs [Hash] the keyword arguments to pass to the handler
+      # @param block [Proc] the block to pass to the handler
+      def self.delegate: (untyped name, *untyped args, **untyped kwargs) { () -> untyped } -> untyped
+
+      # Build Dispatcher
+      #
+      # @api private
+      def self.build: (rack_app: untyped, resolver: untyped) -> untyped
+    end
+  end
+end
