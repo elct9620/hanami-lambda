@@ -9,6 +9,7 @@ module Hanami
   end
 
   interface _App
+    def boot: () -> void
     def root: () -> (Pathname & _ToStr)
     def app: () -> App
     def namespace: () -> Module

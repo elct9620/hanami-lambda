@@ -10,5 +10,6 @@ module Dry
   end
 
   class Inflector
+    def underscore: (String) -> String
   end
 end

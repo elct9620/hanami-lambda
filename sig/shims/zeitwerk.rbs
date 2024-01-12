@@ -12,5 +12,6 @@ module Zeitwerk
 
     def ignore: (*String) -> untyped
     def push_dir: (String) -> untyped
+    def setup: () -> untyped
   end
 end

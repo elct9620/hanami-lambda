@@ -8,9 +8,9 @@ module Hanami
   module Lambda
     VERSION: String
 
-    self.@_mutex: untyped
+    self.@_mutex: Mutex
 
-    self.@gem_loader: untyped
+    self.@gem_loader: Zeitwerk::Loader
 
     # @since 0.1.0
     LAMBDA_EVENT: "lambda.event"
@@ -19,7 +19,7 @@ module Hanami
     LAMBDA_CONTEXT: "lambda.context"
 
     # @since 0.2.0
-    LAMBDA_CONFIG_PATH: untyped
+    LAMBDA_CONFIG_PATH: String
 
     # @since 0.2.0
     LAMBDA_CLASS_NAME: "Lambda"
@@ -35,7 +35,7 @@ module Hanami
     # Run the application
     #
     # @api public
-    def self.call: (event: untyped, context: untyped) -> untyped
+    def self.call: (event: Hash[String, String], context: untyped) -> untyped
 
     # Inflector to convert event key
     #
@@ -43,10 +43,10 @@ module Hanami
     #
     # @since 0.2.0
     # @api private
-    def self.inflector: () -> untyped
+    def self.inflector: () -> Dry::Inflector
 
     # @since 0.1.0
     # @api private
-    def self.gem_loader: () -> untyped
+    def self.gem_loader: () -> Zeitwerk::Loader
   end
 end
