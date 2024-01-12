@@ -3,13 +3,15 @@ name: CI
 on:
   push:
     paths:
-      - '.github/workflows/ci.yml'
+      - '.github/workflows/main.yml'
       - 'lib/**'
       - 'sig/**'
       - '*.gemspec'
       - 'spec/**'
       - 'Rakefile'
       - 'Gemfile'
+      - 'Steepfile'
+      - 'rbs_collection.lock.yaml'
       - '.rubocop.yml'
   pull_request:
     branches:
