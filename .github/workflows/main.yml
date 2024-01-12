@@ -38,6 +38,6 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - name: Bootstrap RBS
-      run: rbs collection install
+      run: bundle exec rbs collection install
     - name: Run all tests
       run: bundle exec rake
