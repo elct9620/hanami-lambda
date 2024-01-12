@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/ci.yml'
       - 'lib/**'
+      - 'sig/**'
       - '*.gemspec'
       - 'spec/**'
       - 'Rakefile'
