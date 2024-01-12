@@ -52,7 +52,7 @@ end
 
 ## Usage
 
-Use `config/lambda.Hanami::Lambda.call` as the function handler
+Use `config/app.Hanami::Lambda.call` as the function handler
 
 ```yaml
 # AWS SAM
@@ -61,7 +61,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
-      Handler: config/lambda.Hanami::Lambda.call
+      Handler: config/app.Hanami::Lambda.call
       Runtime: ruby3.2
 ```
 
