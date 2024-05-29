@@ -40,6 +40,7 @@ module Hanami
     #
     # @api public
     def self.call(event:, context:)
+      require "bundler/setup"
       app.boot
       app.handle_lambda(event: event, context: context)
     end
