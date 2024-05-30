@@ -40,6 +40,6 @@ RSpec.describe Hanami::Lambda::Rack do
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_EVENT) }
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_CONTEXT) }
     it { is_expected.to include("CONTENT_TYPE" => "text/plain") }
-    it { is_expected.to include("X-Custom-Header" => "Custom Value") }
+    it { is_expected.to include("HTTP_X_CUSTOM_HEADER" => "Custom Value") }
   end
 end

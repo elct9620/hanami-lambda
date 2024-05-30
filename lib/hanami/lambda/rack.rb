@@ -53,7 +53,7 @@ module Hanami
                          headers.delete("content-type") ||
                          headers.delete("CONTENT_TYPE")
           env["CONTENT_TYPE"] = content_type if content_type
-        end.merge(headers)
+        end.merge(headers.transform_keys { |k| "HTTP_#{k.upcase.tr('-', '_')}" })
       end
     end
   end
