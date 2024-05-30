@@ -17,6 +17,13 @@ RSpec.describe Hanami::Lambda::Rack do
     }
   end
 
+  let(:headers) do
+    {
+      "Content-Type" => "text/plain",
+      "X-Custom-Header" => "Custom Value"
+    }
+  end
+
   let(:context) { double(:context) }
 
   describe "#call" do
@@ -28,9 +35,11 @@ RSpec.describe Hanami::Lambda::Rack do
   end
 
   describe "#env" do
-    subject(:env) { rack.build_env(event, context) }
+    subject(:env) { rack.build_env(event, headers, context) }
 
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_EVENT) }
     it { is_expected.to include(::Hanami::Lambda::LAMBDA_CONTEXT) }
+    it { is_expected.to include("CONTENT_TYPE" => "text/plain") }
+    it { is_expected.to include("X-Custom-Header" => "Custom Value") }
   end
 end

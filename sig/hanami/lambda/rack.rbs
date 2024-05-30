@@ -26,7 +26,7 @@ module Hanami
       # @return [Hash] the Rack environment
       #
       # @since 0.1.0
-      def build_env: (untyped event, untyped context) -> ::Hash[untyped, untyped]
+      def build_env: (untyped event, untyped headers, untyped context) -> ::Hash[untyped, untyped]
     end
   end
 end

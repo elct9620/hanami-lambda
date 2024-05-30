@@ -24,7 +24,8 @@ module Hanami
       #
       # @since 0.1.0
       def call(event:, context:)
-        env = build_env(event, context)
+        headers = event["headers"] || {}
+        env = build_env(event, headers, context)
         status_code, headers, body = app.call(env)
 
         {
@@ -39,7 +40,7 @@ module Hanami
       # @return [Hash] the Rack environment
       #
       # @since 0.1.0
-      def build_env(event, context)
+      def build_env(event, headers, context)
         {
           ::Rack::REQUEST_METHOD => event["httpMethod"],
           ::Rack::PATH_INFO => event["path"] || "",
@@ -48,9 +49,11 @@ module Hanami
           ::Hanami::Lambda::LAMBDA_EVENT => event,
           ::Hanami::Lambda::LAMBDA_CONTEXT => context
         }.tap do |env|
-          content_type = event.dig("headers", "Content-Type")
+          content_type = headers.delete("Content-Type") ||
+                         headers.delete("content-type") ||
+                         headers.delete("CONTENT_TYPE")
           env["CONTENT_TYPE"] = content_type if content_type
-        end
+        end.merge(headers)
       end
     end
   end
