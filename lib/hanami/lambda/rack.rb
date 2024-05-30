@@ -47,7 +47,10 @@ module Hanami
           ::Rack::RACK_INPUT => StringIO.new(event["body"] || ""),
           ::Hanami::Lambda::LAMBDA_EVENT => event,
           ::Hanami::Lambda::LAMBDA_CONTEXT => context
-        }
+        }.tap do |env|
+          content_type = event["headers"]["Content-Type"]
+          env["CONTENT_TYPE"] = content_type if content_type
+        end
       end
     end
   end
