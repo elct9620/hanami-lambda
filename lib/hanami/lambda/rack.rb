@@ -48,7 +48,7 @@ module Hanami
           ::Hanami::Lambda::LAMBDA_EVENT => event,
           ::Hanami::Lambda::LAMBDA_CONTEXT => context
         }.tap do |env|
-          content_type = event["headers"]["Content-Type"]
+          content_type = event.dig("headers", "Content-Type")
           env["CONTENT_TYPE"] = content_type if content_type
         end
       end
