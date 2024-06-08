@@ -1,22 +1,6 @@
 ---
 path: ".gem_rbs_collection"
 gems:
-- name: abbrev
-  version: '0'
-  source:
-    type: stdlib
-- name: activesupport
-  version: '7.0'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
-- name: base64
-  version: '0'
-  source:
-    type: stdlib
 - name: bigdecimal
   version: '0'
   source:
@@ -25,67 +9,27 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: connection_pool
-  version: '2.4'
+- name: diff-lcs
+  version: '1.5'
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
+    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: csv
-  version: '0'
-  source:
-    type: stdlib
-- name: date
-  version: '0'
-  source:
-    type: stdlib
-- name: erb
-  version: '0'
-  source:
-    type: stdlib
 - name: fileutils
   version: '0'
   source:
     type: stdlib
-- name: forwardable
-  version: '0'
-  source:
-    type: stdlib
-- name: i18n
-  version: '1.10'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: json
   version: '0'
   source:
     type: stdlib
-- name: listen
-  version: '3.2'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: logger
   version: '0'
   source:
     type: stdlib
-- name: minitest
-  version: '0'
-  source:
-    type: stdlib
 - name: monitor
-  version: '0'
-  source:
-    type: stdlib
-- name: mutex_m
   version: '0'
   source:
     type: stdlib
@@ -102,15 +46,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
-- name: rainbow
-  version: '3.0'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
+    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rake
@@ -118,42 +54,18 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: ec140aff951e3af39846eed4525ba5d040d294fa
+    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rbs
-  version: 3.4.2
+  version: 3.5.1
   source:
     type: rubygems
 - name: rdoc
   version: '0'
   source:
     type: stdlib
-- name: securerandom
-  version: '0'
-  source:
-    type: stdlib
-- name: singleton
-  version: '0'
-  source:
-    type: stdlib
-- name: steep
-  version: 1.6.0
-  source:
-    type: rubygems
-- name: strscan
-  version: '0'
-  source:
-    type: stdlib
 - name: tempfile
-  version: '0'
-  source:
-    type: stdlib
-- name: time
-  version: '0'
-  source:
-    type: stdlib
-- name: timeout
   version: '0'
   source:
     type: stdlib
