@@ -10,4 +10,3 @@ gem "rspec", "~> 3.0"
 
 gem "rbs"
 gem "rack"
-gem "steep", "~> 1.6.0", require: false
