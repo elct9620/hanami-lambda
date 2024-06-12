@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "zeitwerk", "~> 2.6"
+  spec.add_dependency "rack", ">= 2.0"
   spec.add_dependency "hanami", "~> 2.0"
   spec.add_dependency "hanami-utils", "~> 2.0"
   spec.add_dependency "dry-struct", "~> 1.0"
