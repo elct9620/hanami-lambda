@@ -5,7 +5,7 @@ module Hanami
     extend _App
 
     def resolve: (String) -> untyped
-    def rack_app: () -> _Rack
+    def rack_app: () -> Rack
   end
 
   interface _App

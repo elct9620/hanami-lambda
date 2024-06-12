@@ -1,3 +1,0 @@
-interface _Rack
-  def call: (env: Hash[Symbol, untyped]) -> [Integer, Hash[String, String], Array[String]]
-end
