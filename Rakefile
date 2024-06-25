@@ -15,7 +15,7 @@ task :steep do
   require "steep"
   require "steep/cli"
 
-  Steep::CLI.new(argv: ["check"], stdout: $stdout, stderr: $stderr, stdin: $stdin).run
+  abort("Steep failed!") if Steep::CLI.new(argv: ["check"], stdout: $stdout, stderr: $stderr, stdin: $stdin).run
 end
 
 task default: %i[spec rubocop steep]
