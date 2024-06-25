@@ -40,7 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-inflector", "~> 1.0"
 
   spec.add_development_dependency "rubocop", "~> 1.59"
-  spec.add_development_dependency "steep", "~> 1.7.1"
 
   spec.metadata["rubygems_mfa_required"] = "true"
 end

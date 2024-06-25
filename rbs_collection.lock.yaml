@@ -14,7 +14,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
+    revision: ea1342ae63c433b0d0c576f9207e96515de9d702
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: fileutils
@@ -46,7 +46,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
+    revision: ea1342ae63c433b0d0c576f9207e96515de9d702
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rake
@@ -54,7 +54,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 5de8f412fd310bc4ee27985347b798cb409a3b77
+    revision: ea1342ae63c433b0d0c576f9207e96515de9d702
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rbs
