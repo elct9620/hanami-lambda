@@ -7,7 +7,9 @@ module Hanami
     class Env
       def initialize(event:, headers:, context:)
         @event = event
-        @headers = standardize_headers(headers)
+        @headers = headers
+        @content_type = extract_content_type
+        @http_headers = transform_http_headers
         @context = context
       end
 
@@ -19,19 +21,21 @@ module Hanami
           ::Rack::RACK_INPUT => StringIO.new(@event["body"] || ""),
           ::Hanami::Lambda::LAMBDA_EVENT => @event,
           ::Hanami::Lambda::LAMBDA_CONTEXT => @context
-        }.merge(@headers)
+        }.tap do |env|
+          env["CONTENT_TYPE"] = @content_type if @content_type
+        end.merge(@http_headers)
       end
 
       private
 
-      def standardize_headers(headers)
-        headers.transform_keys do |key|
-          if ::Rack::Headers::KNOWN_HEADERS[key.downcase.tr("_", "-")]
-            key.upcase.tr("-", "_")
-          else
-            "HTTP_#{key.upcase.tr('-', '_')}"
-          end
-        end
+      def extract_content_type
+        @headers.delete("Content-Type") ||
+          @headers.delete("content-type") ||
+          @headers.delete("CONTENT_TYPE")
+      end
+
+      def transform_http_headers
+        @headers.transform_keys { |k| "HTTP_#{k.upcase.tr('-', '_')}" }
       end
     end
   end
