@@ -13,7 +13,7 @@ module Hanami
 
       # @since 0.2.0
       # @api private
-      def self.extended: (Class base) -> untyped
+      def self.extended: (class base) -> untyped
 
       # Dispatch event to the handler
       #
