@@ -10,6 +10,7 @@ on:
       - 'spec/**'
       - 'Rakefile'
       - 'Gemfile'
+      - 'Gemfile.lock'
       - 'Steepfile'
       - 'rbs_collection.lock.yaml'
       - '.rubocop.yml'
