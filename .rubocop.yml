@@ -4,7 +4,7 @@ inherit_from:
   - https://raw.githubusercontent.com/hanami/devtools/main/.rubocop.yml
 
 AllCops:
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.2
 
 Layout/LineLength:
   Exclude:
