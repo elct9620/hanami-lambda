@@ -13,3 +13,4 @@
 
 # RBS
 .gem_rbs_collection
+.aider*
