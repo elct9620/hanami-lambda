@@ -6,7 +6,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.3"
-gem "rspec", "~> 3.0"
+gem "rspec", "~> 3.13"
 gem "rubocop", "~> 1.75"
 
 gem "rbs"
