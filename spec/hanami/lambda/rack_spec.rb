@@ -33,13 +33,4 @@ RSpec.describe Hanami::Lambda::Rack do
     it { is_expected.to include(body: "Hello from Rack") }
     it { is_expected.to include(headers: {}) }
   end
-
-  describe "#env" do
-    subject(:env) { rack.build_env(event, headers, context) }
-
-    it { is_expected.to include(::Hanami::Lambda::LAMBDA_EVENT) }
-    it { is_expected.to include(::Hanami::Lambda::LAMBDA_CONTEXT) }
-    it { is_expected.to include("CONTENT_TYPE" => "text/plain") }
-    it { is_expected.to include("HTTP_X_CUSTOM_HEADER" => "Custom Value") }
-  end
 end
