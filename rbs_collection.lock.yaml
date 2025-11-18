@@ -1,10 +1,22 @@
 ---
 path: ".gem_rbs_collection"
 gems:
-- name: bigdecimal
-  version: '0'
+- name: base64
+  version: '0.1'
   source:
-    type: stdlib
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
+- name: bigdecimal
+  version: '3.1'
+  source:
+    type: git
+    name: ruby/gem_rbs_collection
+    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
+    remote: https://github.com/ruby/gem_rbs_collection.git
+    repo_dir: gems
 - name: cgi
   version: '0'
   source:
@@ -14,10 +26,14 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 6473f69b212dca4e93be94c84f2086e415a22811
+    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: fileutils
+  version: '0'
+  source:
+    type: stdlib
+- name: io-console
   version: '0'
   source:
     type: stdlib
@@ -41,12 +57,20 @@ gems:
   version: '0'
   source:
     type: stdlib
+- name: pp
+  version: '0'
+  source:
+    type: stdlib
+- name: prettyprint
+  version: '0'
+  source:
+    type: stdlib
 - name: rack
   version: '2.2'
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 6473f69b212dca4e93be94c84f2086e415a22811
+    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rake
@@ -54,14 +78,18 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 6473f69b212dca4e93be94c84f2086e415a22811
+    revision: f1d2dae32fe8d46683fbc79bbd0f1ca391d5e11a
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rbs
-  version: 3.6.1
+  version: 3.9.5
   source:
     type: rubygems
 - name: rdoc
+  version: '0'
+  source:
+    type: stdlib
+- name: stringio
   version: '0'
   source:
     type: stdlib
