@@ -5,6 +5,10 @@ inherit_from:
 
 AllCops:
   TargetRubyVersion: 3.3
+  # CI installs gems into vendor/bundle; without this, RuboCop 1.88 loads
+  # the rbs gem's bundled config and fails on its rubocop-rubycw plugin.
+  Exclude:
+    - "vendor/**/*"
 
 Layout/LineLength:
   Exclude:
