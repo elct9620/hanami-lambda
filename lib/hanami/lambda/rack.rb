@@ -41,19 +41,7 @@ module Hanami
       #
       # @since 0.1.0
       def build_env(event, headers, context)
-        {
-          ::Rack::REQUEST_METHOD => event["httpMethod"],
-          ::Rack::PATH_INFO => event["path"] || "",
-          ::Rack::RACK_VERSION => ::Rack.release,
-          ::Rack::RACK_INPUT => StringIO.new(event["body"] || ""),
-          ::Hanami::Lambda::LAMBDA_EVENT => event,
-          ::Hanami::Lambda::LAMBDA_CONTEXT => context
-        }.tap do |env|
-          content_type = headers.delete("Content-Type") ||
-                         headers.delete("content-type") ||
-                         headers.delete("CONTENT_TYPE")
-          env["CONTENT_TYPE"] = content_type if content_type
-        end.merge(headers.transform_keys { |k| "HTTP_#{k.upcase.tr('-', '_')}" })
+        Env.new(event: event, headers: headers, context: context).to_h
       end
     end
   end

@@ -1,0 +1,5 @@
+module Rack
+  class Headers
+    KNOWN_HEADERS: Hash[String, String]
+  end
+end
